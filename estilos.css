@@ -1,0 +1,34 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background: url(archivos/images/fondo\ hojas.avif);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white
+    ;
+}
+.ingreso{
+    border: solid 2px white;
+    padding: 20px;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 30px black;
+}
+.ingreso input{
+    border-radius: 3px;
+}
+.ingreso input:focus::placeholder{
+    visibility: hidden;
+}
+.boton{
+    border-radius: 2px;
+    width: 100%;
+}
+.boton:hover{
+    background-color: rgb(160, 160, 160);
+    cursor: pointer;
+}
