@@ -6,14 +6,20 @@
     <title>Practica1 tema javascript</title>
     <link rel="stylesheet" href="estilos.css">
     <script>
+       function concookies(elemento1,elemento2){
+        document.cookie = "Nombre=" + elemento1;
+        document.cookie = "Contraseña=" + elemento2;
+        alert(document.cookie);
+       }
+    
        
     </script>
 </head>
 <body>
    <div class="ingreso">
-        <form action="/send" method="post" name="entrada">
+        <form action="https://www.google.es" method="post" name="entrada" id="entrada" onsubmit="return concookies(document.entrada.usuario.value , document.entrada.clave.value);">
             <label for="usuario" name="usuario" id="usuario">Usuario</label><br>
-            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1"><br><br>
+            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1" ><br><br>
             <label for="contraseña" name="contraseña" id="contraseña">Contraseña</label><br>
             <input type="password" name="clave" id="clave" required placeholder="contraseña" tabindex="2"><br><br>
             <button type="submit" name="ingresar" class="boton">Ingresar</button>
