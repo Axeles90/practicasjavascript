@@ -6,24 +6,56 @@
     <title>Practica1 tema javascript</title>
     <link rel="stylesheet" href="estilos.css">
     <script>
+        /* funcion para guardar el usuario y la contraseña en las cookies y mostrar todas las cookies
        function concookies(elemento1,elemento2){
         document.cookie = "Nombre=" + elemento1;
         document.cookie = "Contraseña=" + elemento2;
         alert(document.cookie);
        }
-    
-       
+    */
+        var elemento;
+        var elemento2;
+       function comprobarusuario(elemento){
+            if(elemento.value.length == 0){
+                alert("debe introducir un usuario");
+                return false;
+            }
+            else{
+                document.cookie = "nombre="+ elemento.value;
+                alert("bien "+ document.cookie);
+                return true;
+            }
+       }
+       function comprobarclave(elemento2){
+            if(elemento2.value.length == 0){
+                alert("debe introducir una contraseña");
+                return false;
+            }
+            else{
+                document.cookie = "clave="+ elemento2.value;
+                alert("bien "+ document.cookie);
+                /*el codigo de abajo sirve para eliminar la cookie llamada clave, pero hay que encontrar donde ponerla para que la elimine cuando queremos y no cuando se sale 
+                del focus */
+                
+                /* document.cookie = "clave=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; */
+
+                return true;
+            }
+            function eliminarcookie(){
+                alert("hola");
+            }
+       }
     </script>
 </head>
 <body>
    <div class="ingreso">
-        <form action="https://www.google.es" method="post" name="entrada" id="entrada" onsubmit="return concookies(document.entrada.usuario.value , document.entrada.clave.value);">
+        <form action="https://www.google.es" method="post" name="entrada" id="entrada">
             <label for="usuario" name="usuario" id="usuario">Usuario</label><br>
-            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1" ><br><br>
+            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1" onblur="return comprobarusuario(this);"><br><br>
             <label for="contraseña" name="contraseña" id="contraseña">Contraseña</label><br>
-            <input type="password" name="clave" id="clave" required placeholder="contraseña" tabindex="2"><br><br>
+            <input type="password" name="clave" id="clave" required placeholder="contraseña" tabindex="2" onblur="return comprobarclave(this);"><br><br>
             <button type="submit" name="ingresar" class="boton">Ingresar</button>
-            <button type="reset">reset</button>
+            <button type="button" onclick="eliminarcookie();">eliminar</button>
         </form>    
     </div>
 </body>
