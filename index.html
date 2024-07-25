@@ -6,56 +6,53 @@
     <title>Practica1 tema javascript</title>
     <link rel="stylesheet" href="estilos.css">
     <script>
-        /* funcion para guardar el usuario y la contraseña en las cookies y mostrar todas las cookies
-       function concookies(elemento1,elemento2){
-        document.cookie = "Nombre=" + elemento1;
-        document.cookie = "Contraseña=" + elemento2;
-        alert(document.cookie);
-       }
-    */
-        var elemento;
-        var elemento2;
-       function comprobarusuario(elemento){
-            if(elemento.value.length == 0){
-                alert("debe introducir un usuario");
-                return false;
+       function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
             }
-            else{
-                document.cookie = "nombre="+ elemento.value;
-                alert("bien "+ document.cookie);
-                return true;
-            }
-       }
-       function comprobarclave(elemento2){
-            if(elemento2.value.length == 0){
-                alert("debe introducir una contraseña");
-                return false;
-            }
-            else{
-                document.cookie = "clave="+ elemento2.value;
-                alert("bien "+ document.cookie);
-                /*el codigo de abajo sirve para eliminar la cookie llamada clave, pero hay que encontrar donde ponerla para que la elimine cuando queremos y no cuando se sale 
-                del focus */
-                
-                /* document.cookie = "clave=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; */
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
 
-                return true;
+        // Guardar la cookie
+         // La cookie expira en 30 días
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(";");
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
             }
-            function eliminarcookie(){
-                alert("hola");
-            }
-       }
-    </script>
+            return null;
+        }
+
+        // Recuperar la cookie
+        var username = getCookie("username");
+        if (username) {
+            console.log("Bienvenido de nuevo, " + username);
+        } else {
+            console.log("No se ha encontrado la cookie.");
+        }
+       
+    </script>∫
 </head>
 <body>
    <div class="ingreso">
         <form action="https://www.google.es" method="post" name="entrada" id="entrada">
+            <script>
+                setCookie("username", document.entrada.usuario.value, 30);
+                alert(document.cookie);
+            </script>
             <label for="usuario" name="usuario" id="usuario">Usuario</label><br>
-            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1" onblur="return comprobarusuario(this);"><br><br>
+            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" tabindex="1" ><br><br>
             <label for="contraseña" name="contraseña" id="contraseña">Contraseña</label><br>
-            <input type="password" name="clave" id="clave" required placeholder="contraseña" tabindex="2" onblur="return comprobarclave(this);"><br><br>
+            <input type="password" name="clave" id="clave" required placeholder="contraseña" tabindex="2" ><br><br>
             <button type="submit" name="ingresar" class="boton">Ingresar</button>
-            <button type="button" onclick="eliminarcookie();">eliminar</button>
+           
         </form>    
     </div>
 </body>
